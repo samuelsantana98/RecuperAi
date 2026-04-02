@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth scroll-pt-20">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Investimento | RecuperAi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        v4: {
+                            red: '#E30613',
+                            darkRed: '#5B0F16',
+                            black: '#1a1a1a',
+                            gray: '#f8f9fa'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@300;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif-font {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .bg-v4-gradient {
+            background: linear-gradient(135deg, #E30613 0%, #D00000 50%, #5B0F16 100%);
+        }
+
+        .bg-v4-dark-gradient {
+            background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 70%, #5B0F16 100%);
+        }
+
+        .btn-v4 {
+            background: linear-gradient(90deg, #E30613 0%, #ff4d4d 100%);
+            box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-v4-black/80 backdrop-blur-md border-b border-white/5"
+        id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-black text-white tracking-tighter">RECUPER<span
+                            class="text-v4-red">AI</span></span>
+                    <span
+                        class="ml-2 px-2 py-0.5 bg-v4-red text-[10px] font-black text-white rounded uppercase tracking-widest">V4</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-white/80">
+                    <a href="#problema"
+                        class="hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Problema</a>
+                    <a href="#solucao"
+                        class="hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Solução &
+                        ROI</a>
+                    <a href="#mercado"
+                        class="hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Mercado</a>
+                    <a href="#concorrencia"
+                        class="hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Concorrência</a>
+                    <a href="#time"
+                        class="hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Time</a>
+                    <a href="#investimento"
+                        class="bg-v4-red text-white px-5 py-2 rounded-full hover:bg-white hover:text-v4-red transition font-black text-xs uppercase tracking-widest">Investimento</a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-20 md:pt-48 md:pb-32 px-4 relative overflow-hidden bg-v4-dark-gradient text-white">
+        <div class="max-w-5xl mx-auto text-center fade-in">
+            <div
+                class="inline-block bg-white text-v4-red px-4 py-1 rounded-full text-sm font-black mb-6 tracking-widest uppercase">
+                A Janela de Ouro Tributário
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-tight">
+                A Reforma Tributária Criou o Maior <span class="text-v4-red">Movimento de Recuperação</span> da
+                História.
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto font-light text-gray-300">
+                A <strong>RecuperAi</strong> é uma máquina de aquisição escalável que conecta contadores a empresas com
+                impostos a recuperar,
+                aproveitando a <strong>Janela de Ouro de 60 meses</strong> da Reforma Tributária.
+            </p>
+
+            <div
+                class="glass-card p-6 md:p-8 rounded-2xl max-w-2xl mx-auto border border-white/10 backdrop-blur-xl mb-8">
+                <h3 class="text-xs uppercase tracking-widest text-v4-red mb-3 font-black">Janela de Ouro: Aproveitando a
+                    Transição</h3>
+                <p class="text-sm text-gray-100 mb-5 font-bold leading-relaxed">A Reforma Tributária abre o período
+                    estratégico para recuperar impostos pagos indevidamente nos últimos 60 meses, antes da consolidação
+                    do novo sistema.</p>
+                <div class="flex justify-center space-x-4 md:space-x-8" id="countdown">
+                    <div class="text-center">
+                        <div class="text-4xl md:text-6xl font-black text-white font-mono" id="cd-months">60</div>
+                        <div class="text-xs uppercase text-v4-red mt-1 font-black tracking-tighter">Meses</div>
+                    </div>
+                    <div class="text-4xl md:text-6xl font-black text-white/20">:</div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-6xl font-black text-white font-mono" id="cd-days">29</div>
+                        <div class="text-xs uppercase text-v4-red mt-1 font-black tracking-tighter">Dias</div>
+                    </div>
+                    <div class="text-4xl md:text-6xl font-black text-white/20">:</div>
+                    <div class="text-center">
+                        <div class="text-4xl md:text-6xl font-black text-white font-mono" id="cd-hours">11</div>
+                        <div class="text-xs uppercase text-v4-red mt-1 font-black tracking-tighter">Horas</div>
+                    </div>
+                </div>
+                <div class="mt-6 text-sm text-v4-red font-black animate-pulse">
+                    &#9888; Aproximadamente R$ 450.000 prescrevem diariamente no Brasil.
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="space-y-0">
+        <section id="problema" class="py-24 px-4 bg-white">
+            <div class="max-w-6xl mx-auto fade-in">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black text-v4-black mb-4 italic">O Problema</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto font-medium">O mercado tributário é uma mina de
+                        ouro estagnada por ineficiências operacionais.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="bg-gray-50 p-10 rounded-[2.5rem] border border-gray-100 hover:shadow-2xl transition-all group">
+                        <div
+                            class="w-16 h-16 bg-v4-red/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-v4-red transition-colors text-v4-red group-hover:text-white">
+                            <span class="text-3xl font-black italic">🛒</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-v4-black mb-4 uppercase italic">O Empresário</h3>
+                        <p class="text-gray-600 leading-relaxed font-medium">Deixa dinheiro na mesa e não sabe que pagou
+                            impostos indevidos nos últimos 5 anos.</p>
+                    </div>
+
+                    <div
+                        class="bg-v4-black p-10 rounded-[2.5rem] border border-v4-red/20 text-white hover:shadow-2xl transition-all group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-v4-red/5 blur-3xl"></div>
+                        <div
+                            class="w-16 h-16 bg-v4-red rounded-2xl flex items-center justify-center mb-8 text-white relative z-10">
+                            <span class="text-3xl font-black italic">⚖️</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-v4-red mb-4 uppercase italic relative z-10">O Parceiro
+                            (Contador)</h3>
+                        <p class="text-gray-300 leading-relaxed font-medium relative z-10">Não sabe vender ou investir
+                            em marketing ou montar uma máquina de vendas, mas é excelente na aplicação do ofício que é a
+                            recuperação. Depender apenas de indicações mina o crescimento do escritório.</p>
+                    </div>
+
+                    <div
+                        class="bg-gray-50 p-10 rounded-[2.5rem] border border-gray-100 hover:shadow-2xl transition-all group">
+                        <div
+                            class="w-16 h-16 bg-v4-red/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-v4-red transition-colors text-v4-red group-hover:text-white">
+                            <span class="text-3xl font-black italic">🚫</span>
+                        </div>
+                        <h3 class="text-2xl font-black text-v4-black mb-4 uppercase italic">O RecuperAi Atual</h3>
+                        <p class="text-gray-600 leading-relaxed font-medium">A prospecção fria manual (WhatsApp) gera
+                            bloqueios da meta e não escala.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solucao" class="py-16 px-4 bg-gray-50 border-t border-gray-200">
+            <div class="max-w-6xl mx-auto fade-in">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black text-v4-black mb-4 italic">A Solução</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Conectamos o contador ao empresário através de
+                        uma
+                        máquina de aquisição que vira a chave do <b>Outbound manual</b> para o <b>Inbound escalável</b>.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div
+                        class="order-2 md:order-1 glass-card p-10 rounded-[2rem] bg-v4-black border-none text-white overflow-hidden relative shadow-2xl">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-v4-red/10 blur-3xl rounded-full -mr-32 -mt-32">
+                        </div>
+                        <h3 class="text-center text-sm font-black text-v4-red mb-8 tracking-[0.3em] uppercase">ROI
+                            do Ecossistema</h3>
+                        <div class="chart-container mb-8">
+                            <canvas id="recoveryPieChart"></canvas>
+                        </div>
+                        <div class="space-y-4 pt-6 border-t border-white/10">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider">
+                                <span class="text-gray-300">Retorno para o Empresário </span>
+                                <span class="text-white font-mono text-2xl">R$ 171.000,00</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-black italic">
+                                <span class="text-v4-red">Lucro Parceiro (Sucess fee)</span>
+                                <span class="text-white font-mono">R$ 73.000,00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 space-y-10">
+                        <div class="relative pl-16">
+                            <div
+                                class="absolute left-0 top-0 w-12 h-12 rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-xl shadow-lg shadow-v4-red/20 italic">
+                                01</div>
+                            <h4 class="text-2xl font-black text-v4-black uppercase italic tracking-tight">O Empresário
+                                recebe fôlego</h4>
+                            <p class="text-gray-600 mt-2 leading-relaxed">Impacto social: O empresário recebe um
+                                saldo inesperado (ex: R$ 171k) que oxigena o caixa do negócio.</p>
+                        </div>
+                        <div class="relative pl-16">
+                            <div
+                                class="absolute left-0 top-0 w-12 h-12 rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-xl shadow-lg shadow-v4-red/20 italic">
+                                02</div>
+                            <h4 class="text-2xl font-black text-v4-black uppercase italic tracking-tight">O Parceiro
+                                lucra</h4>
+                            <p class="text-gray-600 mt-2 leading-relaxed">O contador parceiro lucra com o seu sucess fee
+                                (ex: R$ 73k) sobre os valores recuperados.</p>
+                        </div>
+                        <div class="relative pl-16">
+                            <div
+                                class="absolute left-0 top-0 w-12 h-12 rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-xl shadow-lg shadow-v4-red/20 italic">
+                                03</div>
+                            <h4 class="text-2xl font-black text-v4-black uppercase italic tracking-tight">Escala Inbound
+                            </h4>
+                            <p class="text-gray-600 mt-2 leading-relaxed">Nós viramos a chave do Outbound manual para o
+                                Inbound escalável, resolvendo o gargalo de aquisição do projeto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mercado" class="py-24 px-4 bg-white relative">
+            <div class="max-w-6xl mx-auto fade-in">
+                <div
+                    class="bg-v4-black p-10 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden border border-v4-red/30">
+                    <div
+                        class="absolute top-0 right-0 -mt-10 -mr-10 text-[6rem] text-v4-red opacity-10 select-none font-black italic">
+
+                    </div>
+                    <h3
+                        class="text-xl font-black mb-12 relative z-10 text-v4-red tracking-widest uppercase italic text-center">
+                        Dimensionamento de Mercado (Farmácias e Cosméticos)
+                    </h3>
+
+                    <div class="max-w-2xl mx-auto space-y-2 relative z-10">
+                        <div
+                            class="bg-white/10 hover:bg-white/20 transition-all p-6 rounded-t-3xl border-x border-t border-white/20 flex flex-col items-center">
+                            <div class="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1 italic">TAM
+                                (Total Addressable Market)</div>
+                            <div class="text-3xl font-black italic">110.119 <span class="text-xs font-normal">FARMÁCIAS
+                                    NO BRASIL</span></div>
+                        </div>
+                        <div
+                            class="bg-v4-red/20 hover:bg-v4-red/30 transition-all p-8 border-x border-white/20 flex flex-col items-center w-[90%] mx-auto shadow-xl">
+                            <div class="text-[10px] text-white/60 font-black uppercase tracking-widest mb-1 italic">SAM
+                                (Serviceable Addressable Market)</div>
+                            <div class="text-4xl font-black italic">58.963 (53%) <span class="text-sm font-normal">FOCO
+                                    SIMPLES NACIONAL</span></div>
+                        </div>
+                        <div
+                            class="bg-v4-red p-10 rounded-b-3xl flex flex-col items-center w-[75%] mx-auto shadow-2xl transform scale-110">
+                            <div class="text-[10px] text-v4-black font-black uppercase tracking-widest mb-1 italic">SOM
+                                (Serviceable Obtainable Market)</div>
+                            <div class="text-5xl font-black italic">1.179 (2%) <span class="text-lg font-normal"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 flex justify-between items-end border-t border-white/10 pt-6">
+                        <p class="text-[10px] text-gray-300 uppercase tracking-widest font-black italic leading-tight">
+                            Densidade Monofásica: 80% do mix de produtos.
+                        </p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black italic text-right">
+                            Referência: Big Data de Empresas Ativas.
+                        </p>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-8 bg-v4-black p-10 rounded-[2.5rem] border border-v4-red/20 shadow-2xl text-white relative overflow-hidden">
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-v4-red/5 blur-3xl -ml-32 -mb-32"></div>
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-white/10 pb-6 relative z-10">
+                        <div>
+                            <h3 class="text-2xl font-black text-white tracking-tighter uppercase italic">Prova de Valor
+                                (MVP Executado)</h3>
+                            <p class="text-v4-red font-black text-sm mt-1 uppercase tracking-widest">Investimento
+                                Piloto: R$ 80,00 de disparos no Meta</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 relative z-10">
+                        <div class="space-y-6 flex flex-col justify-center lg:col-span-3">
+                            <p class="text-sm text-gray-300 leading-relaxed font-medium">
+                                Disparamos um teste para uma base de 300 leads (cadastrados até 5 anos na V4) que se
+                                encaixavam nos critérios monofásicos. <strong>Resultado: 5 agendamentos e R$ 2.250,00
+                                    faturados.</strong>
+                                <br><br>
+                                O MVP deixou duas coisas claras: contadores sem aparato tecnológico fazem seus clientes
+                                pagarem impostos significativamente maiores, e os <strong>empresários</strong> são
+                                vítimas silenciosas dessa bitributação. Trouxemos duas contabilidades com softwares
+                                TaxTech para garantir a entrega. O feedback foi tão excepcional de ambos os
+                                lados que alguns empresários que não são clientes V4, já cogitam se tornar clientes V4
+                                após essa injeção de
+                                caixa.
+                            </p>
+                            <div
+                                class="text-sm text-white font-black uppercase tracking-widest flex items-center bg-v4-red/20 p-4 rounded-xl border border-v4-red/30 w-max">
+                                <span class="w-2 h-2 rounded-full bg-v4-red animate-pulse mr-3"></span> R$ 244K de
+                                impostos a restituir
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white/5 p-8 rounded-2xl border border-white/10 flex flex-col justify-center backdrop-blur-sm lg:col-span-2">
+                            <div class="text-[11px] text-gray-400 uppercase font-bold mb-4 tracking-widest">O "Win-Win"
+                                do Ecossistema:</div>
+                            <div class="text-3xl font-black text-white leading-tight">
+                                <span class="text-gray-400 text-lg">EMPRESÁRIO:</span> <span class="italic">R$
+                                    171k</span>
+                                <br>
+                                <span class="text-v4-red text-lg">CONTADOR:</span> <span class="text-v4-red italic">R$
+                                    73k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="concorrencia" class="py-24 px-4 bg-v4-black overflow-hidden relative">
+            <div class="absolute inset-0 bg-v4-dark-gradient opacity-90"></div>
+            <div class="max-w-6xl mx-auto fade-in relative z-10">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-5xl font-black text-white mb-4 italic uppercase">O Mapa Competitivo</h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto font-medium tracking-tight">Onde os tubarões estão
+                        e por que o nosso <span class="text-v4-red">MOAT de Distribuição</span> nos isola no mercado.
+                    </p>
+                </div>
+
+                <div class="relative w-full max-w-4xl mx-auto mt-12 mb-16 p-4 md:p-12">
+
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-8 flex flex-col items-center">
+                        <span class="text-v4-red font-black text-sm md:text-base uppercase tracking-widest">Solução
+                            Completa</span>
+                        <span
+                            class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">(Execução
+                            / Done-For-You)</span>
+                        <div class="h-6 w-0.5 bg-v4-red mt-2"></div>
+                        <div class="w-3 h-3 border-t-2 border-r-2 border-v4-red transform -rotate-45 -mt-1.5"></div>
+                    </div>
+
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 -mb-10 flex flex-col items-center">
+                        <div class="w-3 h-3 border-b-2 border-l-2 border-gray-500 transform -rotate-45 -mb-1.5"></div>
+                        <div class="h-6 w-0.5 bg-gray-500 mb-2"></div>
+                        <span class="text-gray-500 font-black text-sm md:text-base uppercase tracking-widest">Apenas
+                            Ferramenta</span>
+                        <span
+                            class="text-[10px] md:text-xs text-gray-600 font-bold uppercase tracking-widest mt-1">(SaaS
+                            / Infraestrutura)</span>
+                    </div>
+
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-12 flex items-center">
+                        <div class="flex flex-col items-end mr-2 text-right">
+                            <span
+                                class="text-gray-500 font-black text-sm md:text-base uppercase tracking-widest">Aquisição
+                                Analógica</span>
+                            <span
+                                class="text-[10px] md:text-xs text-gray-600 font-bold uppercase tracking-widest mt-1">(Outbound
+                                / Franquias / Rede)</span>
+                        </div>
+                        <div class="w-6 h-0.5 bg-gray-500"></div>
+                        <div class="w-3 h-3 border-b-2 border-l-2 border-gray-500 transform rotate-45 -ml-1.5"></div>
+                    </div>
+
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-12 flex items-center">
+                        <div class="w-3 h-3 border-t-2 border-r-2 border-v4-red transform rotate-45 -mr-1.5"></div>
+                        <div class="w-6 h-0.5 bg-v4-red"></div>
+                        <div class="flex flex-col items-start ml-2 text-left">
+                            <span class="text-v4-red font-black text-sm md:text-base uppercase tracking-widest">Máquina
+                                Digital</span>
+                            <span
+                                class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">(Inbound
+                                / Growth V4)</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 grid-rows-2 aspect-square md:aspect-[4/3] w-full relative">
+                        <div class="absolute inset-0 pointer-events-none">
+                            <div
+                                class="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 border-l border-dashed border-white/20">
+                            </div>
+                            <div
+                                class="absolute top-1/2 left-0 right-0 h-px bg-white/10 border-t border-dashed border-white/20">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center p-4 md:p-8 relative z-10 group">
+                            <div
+                                class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-2xl backdrop-blur-sm w-full text-center transition-all group-hover:bg-white/10">
+                                <h4 class="text-xs text-gray-500 font-black uppercase tracking-[0.2em] mb-4">TaxTechs &
+                                    Franquias</h4>
+                                <span class="block text-gray-300 font-black text-lg md:text-xl mb-2">Save
+                                    Partners</span>
+                                <span class="block text-gray-300 font-black text-lg md:text-xl mb-2">AG Capital</span>
+                                <span class="block text-gray-400 font-bold text-md md:text-lg mb-2">Dr. Fiscal</span>
+                                <span class="block text-gray-400 font-bold text-md md:text-lg">Tax Group</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center p-4 md:p-8 relative z-10">
+                            <div
+                                class="bg-v4-red/10 border-2 border-v4-red p-6 md:p-10 rounded-[2rem] backdrop-blur-md w-full text-center transform scale-110 shadow-[0_0_50px_rgba(227,6,19,0.3)] animate-pulse hover:animate-none transition-all">
+                                <div
+                                    class="text-white text-[10px] md:text-xs font-black uppercase tracking-[0.2em] mb-3">
+                                </div>
+                                <div class="text-3xl md:text-5xl font-black text-white tracking-tighter">RECUPER<span
+                                        class="text-v4-red">AI</span></div>
+                                <div
+                                    class="inline-block mt-2 px-3 py-1 bg-v4-red text-[10px] md:text-xs font-black text-white rounded uppercase tracking-widest shadow-lg">
+                                    V4 Company</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center p-4 md:p-8 relative z-10 group">
+                            <div
+                                class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-2xl backdrop-blur-sm w-full text-center opacity-70 transition-all group-hover:opacity-100">
+                                <h4 class="text-xs text-gray-600 font-black uppercase tracking-[0.2em] mb-4">SaaS /
+                                    Ferramentas</h4>
+                                <span class="block text-gray-500 font-bold text-sm md:text-md mb-2">É-Simples</span>
+                                <span class="block text-gray-500 font-bold text-sm md:text-md mb-2">Auditto</span>
+                                <span class="block text-gray-500 font-bold text-sm md:text-md">ASIS TaxTech</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center p-4 md:p-8 relative z-10 group">
+                            <div
+                                class="bg-white/5 border border-white/10 p-4 md:p-6 rounded-2xl backdrop-blur-sm w-full text-center opacity-70 transition-all group-hover:opacity-100">
+                                <h4 class="text-xs text-gray-500 font-black uppercase tracking-[0.2em] mb-4">BPO de
+                                    Vendas B2B</h4>
+                                <span class="block text-gray-400 font-bold text-sm md:text-md mb-2">Protagnst</span>
+                                <span class="block text-gray-400 font-bold text-sm md:text-md mb-2">Vinteo</span>
+                                <span class="block text-gray-400 font-bold text-sm md:text-md mb-2">Contact SDR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-4xl mx-auto mt-8 relative">
+                    <div class="absolute -left-6 top-0 text-v4-red text-6xl opacity-20 font-serif">"</div>
+                    <div class="bg-white/5 border border-white/10 rounded-[2rem] p-8 backdrop-blur-sm relative z-10">
+                        <div class="text-v4-red text-xs font-black uppercase tracking-widest mb-3">O Fosso Competitivo:
+                            Distribuição + Confiança</div>
+                        <p class="text-base md:text-lg text-gray-300 leading-relaxed font-medium mb-4">
+                            Softwares Tributários e de Tax Tech viraram commodities. O advento da Inteligência
+                            mais recente report da <strong>Sequoia Capital</strong> sobre o avanço dos <em>"Tech-Enabled
+                                Services"</em>, o cliente B2B não quer assinar mais um software avulso; ele quer o
+                            <strong>resultado projetado</strong>.
+                        </p>
+                        <p class="text-base md:text-lg text-gray-300 leading-relaxed font-medium mb-4">
+                            Nós não vendemos a ferramenta para o cliente trabalhar (workflow), nós entregamos o dinheiro
+                            na conta (outcome). Capturamos a atenção trafegando pelo maior ecossistema de Growth B2B do
+                            país. Segundo o Diretor de Mídia Paga da V4 Company, apenas no último ano, as campanhas da
+                            marca impulsionaram um alcance total de <strong>70.273.194 milhões de contas
+                                alcançadas</strong> (Meta e Google). É tracionando
+                            toda essa amplitude de atenção e nossa Chancela Institucional perante mais de 30.000
+                            empresários que blindamos nosso moat de conversão frente a qualquer competidor.
+                        </p>
+                        <p class="text-lg md:text-xl text-white font-black italic mt-6 border-l-4 border-v4-red pl-4">
+                            "Na corrida do "ouro tributário", o modelo SaaS tradicional tenta vender pás e picaretas.
+                            Nós
+                            utilizamos os avançados Softwares de Tax Tech dos parceiros como potentes escavadeiras
+                            ocultas para
+                            extrair e entregar a barra de ouro pronta nas mãos do empresário."
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section id="roadmap" class="py-24 px-4 bg-white">
+            <div class="max-w-6xl mx-auto fade-in">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-black text-v4-black mb-4 italic uppercase">Roadmap de Produto
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Domínio cirúrgico de nichos. Calibramos a máquina
+                        no segmento com maior densidade e expandimos para o próximo degrau.</p>
+                </div>
+
+                <div class="relative max-w-4xl mx-auto pt-10">
+                    <div
+                        class="flex flex-col md:flex-row items-end h-[400px] gap-2 md:gap-4 border-b-2 border-v4-black pb-2">
+                        <div class="w-full md:w-1/3 h-1/3 relative group cursor-pointer transition-all duration-300">
+                            <div
+                                class="absolute inset-0 bg-gray-50 border-t-4 border-v4-red transition-all group-hover:bg-v4-red group-hover:text-white flex flex-col justify-end p-4 shadow-lg">
+                                <h4 class="font-black text-v4-black text-lg group-hover:text-white">Fase 1:
+                                    Farmácias/Cosméticos</h4>
+                                <span class="text-xs text-v4-red font-black uppercase group-hover:text-white/80">Nicho
+                                    Inicial</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-1/3 h-2/3 relative group cursor-pointer transition-all duration-300">
+                            <div
+                                class="absolute inset-0 bg-v4-red text-white border-t-4 border-v4-black flex flex-col justify-end p-4 shadow-xl">
+                                <h4 class="font-black text-lg">Fase 2: Autopeças</h4>
+                                <span class="text-xs text-white/70 font-black uppercase">Escala</span>
+                            </div>
+                        </div>
+
+                        <div class="w-full md:w-1/3 h-full relative group cursor-pointer transition-all duration-300">
+                            <div
+                                class="absolute inset-0 bg-v4-black text-white border-t-4 border-v4-red flex flex-col justify-end p-4 shadow-2xl">
+                                <h4 class="font-black text-v4-red text-lg">Fase 3: Bebidas/Pet/Bares</h4>
+                                <span class="text-xs text-gray-500 font-black uppercase tracking-widest">Expansão
+                                    Massiva</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="time" class="py-24 px-4 bg-gray-50 border-t border-gray-200">
+            <div class="max-w-6xl mx-auto fade-in">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-6xl font-black text-v4-black mb-4 italic uppercase">O Time</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">DNA V4 Company com foco radical em execução e
+                        eficiência de caixa.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 mb-12">
+                    <div
+                        class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-gray-100 flex flex-col md:flex-row items-center md:items-start gap-8">
+                        <img src="https://lh3.googleusercontent.com/d/1MyZBwaNir99wEQ84SjiT66iIT92q-PN1"
+                            alt="Samuel Santana"
+                            class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover shadow-2xl flex-shrink-0 border-4 border-v4-red/20 hover:border-v4-red transition-all duration-300">
+                        <div>
+                            <h4 class="text-2xl font-black text-v4-black italic uppercase mb-1">Samuel Santana</h4>
+                            <div class="text-v4-red font-black text-xs tracking-widest uppercase mb-4">Growth &
+                                Estratégia</div>
+                            <p class="text-gray-600 text-sm leading-relaxed font-medium">5 anos na V4 Company. Vencedor
+                                do projeto de inovação na V4 (Looking Ahead). Formação em Gestão
+                                Financeira e o cérebro por trás da ideação e execução do RecuperAi.</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-gray-100 flex flex-col md:flex-row items-center md:items-start gap-8">
+                        <img src="https://lh3.googleusercontent.com/d/1Ppy3GzAh9arpDxvgVyAHM7KcOxLzcajm"
+                            alt="Germano Santana"
+                            class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover shadow-2xl flex-shrink-0 border-4 border-v4-black/20 hover:border-v4-black transition-all duration-300">
+                        <div>
+                            <h4 class="text-2xl font-black text-v4-black italic uppercase mb-1">Germano Santana</h4>
+                            <div class="text-v4-red font-black text-xs tracking-widest uppercase mb-4">Operações & IA
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed font-medium">Engenheiro Mecânico,
+                                ex-franqueado V4 Company (+5 anos de ecossistema). Cérebro da automação e IA da máquina
+                                de prospecção. Une visão analítica e agressividade comercial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-v4-black p-8 rounded-[2rem] text-white text-center shadow-xl max-w-3xl mx-auto relative overflow-hidden">
+                    <div class="absolute inset-0 bg-v4-red/10 blur-2xl"></div>
+                    <div class="relative z-10">
+                        <h4 class="text-lg font-black uppercase text-v4-red tracking-widest mb-2">A Ponta da Entrega
+                        </h4>
+                        <p class="text-gray-300 font-medium">Parceiros homologados com softwares Enterprise fecham a
+                            equação operacional, garantindo a auditoria e recuperação em massa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+        </div>
+        </div>
+        </section>
+
+        <section id="investimento" class="py-24 px-4 bg-white border-t border-gray-100">
+            <div class="max-w-5xl mx-auto fade-in">
+                <div
+                    class="bg-gray-50 rounded-[3rem] shadow-2xl p-8 md:p-16 border border-gray-200 relative overflow-hidden">
+                    <div class="relative z-10 text-center">
+                        <div
+                            class="inline-block text-v4-red bg-v4-red/10 px-4 py-1 rounded-full text-xs font-black mb-6 tracking-widest uppercase border border-v4-red/20">
+                            Modelo de Negócios
+                        </div>
+                        <h2 class="text-4xl md:text-6xl font-black text-v4-black mb-6 italic">Aceleração da Máquina</h2>
+
+                        <div class="mb-10 max-w-4xl mx-auto">
+                            <div class="text-[10px] text-v4-red font-black uppercase tracking-[0.2em] mb-2">A Tese Value
+                                as a Service (Dener Lippert, CEO V4)</div>
+                            <p class="text-sm text-gray-500 font-medium mb-8 leading-relaxed">
+                                <em>"As empresas não querem pagar por serviço, elas querem pagar por resultado
+                                    incremental: não por fee, não por usuário, não por token."</em> Guiados por essa
+                                tese de mercado, <strong>nosso roadmap de monetização</strong> é estruturado em duas
+                                fases: a capacidade de fazer a roda girar agora e a expansão absurda de lucro no médio
+                                prazo.
+                            </p>
+
+                            <div class="grid md:grid-cols-2 gap-6 text-left">
+                                <div
+                                    class="bg-white p-8 pt-10 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden transition-all hover:shadow-md">
+                                    <div
+                                        class="absolute top-0 left-0 bg-gray-500 text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-br-2xl shadow-sm z-20 tracking-widest">
+                                        Fase 1: Presente (Validado)</div>
+                                    <div class="absolute top-0 right-0 w-2 h-full bg-gray-300 w-1.5"></div>
+                                    <h4 class="text-xs font-black uppercase text-gray-500 mb-2 tracking-widest mt-2">A
+                                        Máquina Girando</h4>
+                                    <p class="text-lg font-black text-v4-black italic mb-2">Fee Fixo (R$ 450 por
+                                        Agendamento)</p>
+                                    <p class="text-xs text-gray-500 font-medium leading-relaxed mt-2">Garante a
+                                        viabilidade imediata, cobre 100% do nosso CAC e sustenta a operação hoje. O
+                                        parceiro paga apenas para receber o Lead quente na mesa pronto para fechar.</p>
+                                </div>
+                                <div
+                                    class="bg-v4-red/5 p-8 pt-10 rounded-3xl border border-v4-red/20 shadow-sm relative overflow-hidden transition-all hover:shadow-md">
+                                    <div
+                                        class="absolute top-0 left-0 bg-v4-red text-white text-[10px] font-black uppercase px-4 py-1.5 rounded-br-2xl shadow-lg z-20 tracking-widest">
+                                        Fase 2: Futuro (O Grande Upside)</div>
+                                    <div class="absolute top-0 right-0 w-2 h-full bg-v4-red w-1.5 z-10"></div>
+                                    <h4
+                                        class="text-xs font-black uppercase text-v4-red mb-2 tracking-widest relative z-10 mt-2">
+                                        Valuation B2B</h4>
+                                    <p class="text-lg font-black text-v4-red italic mb-2 relative z-10">Success Fee (% a
+                                        instituir)</p>
+                                    <p class="text-xs text-gray-600 font-medium leading-relaxed mt-2 relative z-10">Com
+                                        tração dominante, destravaremos o verdadeiro Valuation. A execução tributária
+                                        sensível será sempre descentralizada via parceiros homologados (zero passivo
+                                        legal e 0% de atrito com o core da V4). O nosso ganho virá na forma de um
+                                        profundo <strong><em>Take Rate</em> (%) extraído diretamente sobre os honorários
+                                            do parceiro</strong>, garantido por trava contratual. Escalamos recebendo
+                                        fatia de milhões, terceirizando o custo e a burocracia técnica.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-v4-dark-gradient text-white p-8 md:p-12 rounded-[2.5rem] mb-10 w-full max-w-4xl mx-auto shadow-2xl relative overflow-hidden flex flex-col gap-10">
+                            <div
+                                class="absolute top-1/2 right-0 w-64 h-64 bg-v4-red/20 blur-[80px] transform -translate-y-1/2 pointer-events-none">
+                            </div>
+
+                            <div
+                                class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-10 border-b border-white/10 relative z-10">
+                                <div class="text-left w-full md:w-5/12 md:border-r border-white/10 md:pr-8">
+                                    <div class="text-[11px] uppercase tracking-widest text-v4-red font-black mb-2">
+                                        Capital Solicitado (Rodada)</div>
+                                    <div class="text-4xl md:text-5xl font-black font-mono text-white italic mb-3">R$
+                                        30.000
+                                    </div>
+                                    <div class="text-xs text-gray-400 font-medium tracking-wide leading-relaxed">
+                                        <span class="text-white font-black">Destinação:</span> Capital destinado 100%
+                                        para Mídia. Projetamos 223 agendamentos usando o benchmark da base de <strong>R$
+                                            135/Reunião</strong> (métricas extraídas de franquias V4 que já tocaram
+                                        serviços contábeis). Graças ao alcance monstruoso da nossa marca, projetamos
+                                        custos reais menores, mas modelamos com essa base propositalmente conservadora
+                                        para proteger a rodada.
+                                    </div>
+                                </div>
+
+                                <div class="text-left w-full md:w-7/12 md:pl-2">
+                                    <div
+                                        class="text-sm uppercase tracking-widest text-white/50 font-black mb-2 flex items-center">
+                                        Fase 1: Receita Direta (Fee Fixo)
+                                    </div>
+                                    <div
+                                        class="text-5xl md:text-6xl font-black font-mono text-white italic mb-2 tracking-tighter">
+                                        R$ 100k<span class="text-4xl text-v4-red ml-1"></span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 font-medium tracking-wide leading-relaxed">
+                                        Venda imediata das 223 reuniões a R$ 450. ROAS de 3,33x para proteger fluxo de
+                                        caixa e pagar todo o custo operacional de imediato.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 relative z-10">
+                                <div class="text-left w-full md:w-5/12 md:border-r border-white/10 md:pr-8">
+                                    <div
+                                        class="text-[11px] uppercase tracking-widest text-v4-red font-black mb-2 flex items-center">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-v4-red animate-pulse mr-2"></span>
+                                        Lógica do VaaS (Unit Economics)
+                                    </div>
+                                    <ul class="text-xs text-gray-300 font-medium tracking-wide space-y-3 mt-4">
+                                        <li><strong class="text-white">Conversão:</strong> 80% das 223 reuniões geram
+                                            impostos a recuperar (= 178 clientes na base).</li>
+                                        <li><strong class="text-white">Ticket Médio de Recuperação:</strong> R$
+                                            48.000,00/cliente (Cálculo conservador: Farmácia padrão de bairro com R$ 80
+                                            Mil/mês de faturamento. Crédito de 1% em tributação monofásica cobrada
+                                            indevidamente = R$ 800/mês x 60 meses de retroativo legal).</li>
+                                        <li><strong class="text-white">O Take Rate:</strong> Repasse de 10% dos lucros
+                                            do contador (que cobra aprox. 30%), resultando em <strong>R$ 1.440,00
+                                                líquidos para a V4</strong> por cliente recuperado.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="text-left w-full md:w-7/12 md:pl-2">
+                                    <div
+                                        class="text-sm uppercase tracking-widest text-v4-red font-black mb-2 flex items-center">
+                                        <span class="w-2 h-2 rounded-full bg-v4-red animate-pulse mr-2"></span>
+                                        Fase 2: Retorno Incremental (Success Fee)
+                                    </div>
+                                    <div
+                                        class="text-6xl md:text-[5.5rem] font-black font-mono text-v4-red italic leading-none tracking-tighter mb-4 mt-2">
+                                        R$ 257k<span class="text-4xl text-white ml-1">+</span>
+                                    </div>
+                                    <div
+                                        class="text-[11px] text-gray-400 font-medium tracking-wide leading-relaxed border-l-2 border-v4-red/30 pl-3">
+                                        Receita limpa sobre a base convertida com <strong>ciclo médio de liquidação
+                                            estimado em 4 meses</strong> (tempo referencial de processamento pela
+                                        Receita Federal de acordo com os próprios contadores). Esse é o racional prático
+                                        do <em>Value as a Service</em> no nosso roadmap: receita de altíssima margem
+                                        escalável sem assumir o passivo técnico da recuperação.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-8 text-center">
+                            <a href="https://wa.me/5531975215167?text=Ol%C3%A1%20Samuel%2C%20venho%20te%20dizer%20que%20sua%20iniciativa%20foi%20aprovada%20e%20receber%C3%A1%20nosso%20financiamento.%20Vamos%20juntos!!"
+                                target="_blank"
+                                class="btn-v4 inline-block text-white text-lg font-black px-12 py-5 rounded-full transition-all transform hover:-translate-y-2 hover:scale-105 tracking-[0.2em] uppercase shadow-2xl shadow-v4-red/40 italic">
+                                Bora de RecuperAí?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-v4-black py-8 text-center border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-gray-500">
+            <div class="mb-4 md:mb-0">
+                <span class="text-xl font-black text-white uppercase tracking-tighter">RECUPER<span
+                        class="text-v4-red font-black">AI</span></span>
+            </div>
+            <div class="text-sm font-medium">
+                &copy; 2024 RecuperAi Tecnologia. Dados confidenciais. Este material não constitui oferta pública de
+                valores mobiliários.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Navigation Scroll Effect ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-2xl', 'bg-v4-black/95');
+                    navbar.classList.remove('bg-v4-black/80');
+                } else {
+                    navbar.classList.remove('shadow-2xl', 'bg-v4-black/95');
+                    navbar.classList.add('bg-v4-black/80');
+                }
+            });
+
+            // --- Fade In Animation on Scroll ---
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(el => observer.observe(el));
+
+            // --- Countdown Timer Logic ---
+            let seconds = 0;
+            let minutes = 0;
+            let hours = 11;
+            let days = 29;
+
+            const elDays = document.getElementById('cd-days');
+            const elHours = document.getElementById('cd-hours');
+
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        elHours.innerText = hours.toString().padStart(2, '0');
+                        if (hours < 0) {
+                            hours = 23;
+                            days--;
+                            elDays.innerText = days.toString().padStart(2, '0');
+                        }
+                    }
+                }
+            }, 1000);
+
+            // --- Chart.js: Accountant ROI Chart ---
+            const ctx = document.getElementById('recoveryPieChart').getContext('2d');
+            const recoveryPieChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Investimento do contador (SQLs)', 'Honorários (Lucro Líquido)'],
+                    datasets: [{
+                        data: [1.5, 98.5],
+                        backgroundColor: [
+                            '#ffffff',
+                            '#E30613'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '78%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11,
+                                    weight: '800'
+                                },
+                                color: '#ffffff',
+                                padding: 25,
+                                usePointStyle: true,
+                                generateLabels: function (chart) {
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {
+                                        return data.labels.map(function (label, i) {
+                                            const ds = data.datasets[0];
+                                            const val = i === 0 ? "R$ 2.250" : "R$ 73.000";
+                                            return {
+                                                text: label + ': ' + val,
+                                                fillStyle: ds.backgroundColor[i],
+                                                hidden: false,
+                                                index: i,
+                                                fontColor: '#ffffff',
+                                                pointStyle: 'rectRounded'
+                                            };
+                                        });
+                                    }
+                                    return [];
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1a1a1a',
+                            titleFont: { family: "'Inter', sans-serif", size: 14 },
+                            bodyFont: { family: "'Inter', sans-serif", size: 14 },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.label || '';
+                                    const val = context.dataIndex === 0 ? "R$ 2.250" : "R$ 73.000";
+                                    return label + ': ' + val;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
