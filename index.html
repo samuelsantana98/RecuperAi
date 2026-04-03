@@ -635,7 +635,7 @@
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.10 // Reduzido um pouco para o mobile ativar mais fácil
+                threshold: 0.10
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
@@ -649,6 +649,28 @@
 
             fadeElements.forEach(el => observer.observe(el));
 
+            // --- Scroll Suave Forçado e Preciso ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault(); 
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = document.getElementById('navbar').offsetHeight + 40;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
             // --- Countdown Timer Logic ---
             let seconds = 0;
             let minutes = 0;
@@ -657,34 +679,7 @@
 
             const elDays = document.getElementById('cd-days');
             const elHours = document.getElementById('cd-hours');
-// --- Scroll Suave Forçado e Preciso ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Impede o pulo seco padrão
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Calcula a altura do menu fixo (navbar) + um respiro extra de 40px
-                    const headerOffset = document.getElementById('navbar').offsetHeight + 40;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-                    // Desliza suavemente até o ponto exato
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // --- Countdown Timer Logic ---
-        let seconds = 0;
-
-            
             setInterval(() => {
                 seconds--;
                 if (seconds < 0) {
@@ -719,18 +714,18 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '75%', // Ajustado para não ficar tão fino no mobile
+                    cutout: '75%',
                     plugins: {
                         legend: {
                             position: 'bottom',
                             labels: {
                                 font: {
                                     family: "'Inter', sans-serif",
-                                    size: 10, // Menor pro mobile
+                                    size: 10,
                                     weight: '800'
                                 },
                                 color: '#ffffff',
-                                padding: 15, // Menos padding no mobile
+                                padding: 15,
                                 usePointStyle: true,
                                 generateLabels: function (chart) {
                                     const data = chart.data;
