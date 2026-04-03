@@ -221,8 +221,7 @@
                         <div class="relative pl-14 md:pl-16">
                             <div class="absolute left-0 top-0 w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-lg md:text-xl shadow-lg shadow-v4-red/20 italic">03</div>
                             <h4 class="text-xl md:text-2xl font-black text-v4-black uppercase italic tracking-tight">O RecuperAi</h4>
-                            <p class="text-sm md:text-base text-gray-600 mt-2 leading-relaxed">Nós já recebemos R$ 2.250,00 referente aos 5 agendamentos enviados. Claramente, a escala está em participar do resultado por isto precisamos do investimento para aplicar o VAAS.
-                            </p>
+                            <p class="text-sm md:text-base text-gray-600 mt-2 leading-relaxed">Nós já recebemos R$ 2.250,00 referente aos 5 agendamentos enviados. Claramente, a escala está em participar do resultado por isto precisamos do investimento para aplicar o VAAS.</p>
                         </div>
                     </div>
                 </div>
@@ -294,6 +293,7 @@
 
     </div>
 </section>
+
         <section id="concorrencia" class="py-16 md:py-24 px-4 bg-v4-black overflow-hidden relative">
             <div class="absolute inset-0 bg-v4-dark-gradient opacity-90"></div>
             <div class="max-w-6xl mx-auto fade-in relative z-10">
@@ -644,17 +644,15 @@
                     maintainAspectRatio: false,
                     cutout: '75%', 
                     plugins: {
-legend: {
-                            position: 'bottom', // Sugiro manter em baixo para não espremer o gráfico
+                        legend: {
+                            position: 'bottom',
                             labels: {
                                 font: {
                                     family: "'Inter', sans-serif",
-                                    // Responsivo: 12px no telemóvel, 16px no computador
                                     size: window.innerWidth < 768 ? 12 : 16, 
                                     weight: '800'
                                 },
                                 color: '#ffffff',
-                                // Menos espaçamento no telemóvel
                                 padding: window.innerWidth < 768 ? 15 : 25, 
                                 usePointStyle: true,
                                 pointStyle: 'rectRounded',
@@ -681,10 +679,6 @@ legend: {
                                             };
                                         });
                                     }
-                                    return [];
-                                }
-                            }
-                        },
                                     return [];
                                 }
                             }
