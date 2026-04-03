@@ -644,17 +644,19 @@
                     maintainAspectRatio: false,
                     cutout: '75%', 
                     plugins: {
-                            legend: {
-                            position: 'bottom',
+                           legend: {
+                            position: 'top', // Alterado de 'bottom' para 'top'
                             labels: {
                                 font: {
                                     family: "'Inter', sans-serif",
-                                    size: 10, // <--- ESTÁ AQUI
+                                    size: 18, // Aumentado agressivamente para 18px
                                     weight: '800'
                                 },
                                 color: '#ffffff',
-                                padding: 15, 
+                                padding: 25, // Aumentado para 25 para dar mais espaço
                                 usePointStyle: true,
+                                pointStyle: 'rectRounded',
+                                pointStyleWidth: 15, // Aumentado o tamanho do ícone marcador
                                 generateLabels: function (chart) {
                                     const data = chart.data;
                                     if (data.labels.length && data.datasets.length) {
