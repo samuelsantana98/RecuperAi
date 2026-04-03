@@ -649,13 +649,14 @@
                             labels: {
                                 font: {
                                     family: "'Inter', sans-serif",
-                                    size: window.innerWidth < 768 ? 12 : 16, 
+                                    size: window.innerWidth < 768 ? 11 : 14, 
                                     weight: '800'
                                 },
                                 color: '#ffffff',
-                                padding: window.innerWidth < 768 ? 15 : 25, 
+                                padding: window.innerWidth < 768 ? 10 : 20, 
                                 usePointStyle: true,
                                 pointStyle: 'rectRounded',
+                                boxWidth: window.innerWidth < 768 ? 10 : 15,
                                 generateLabels: function (chart) {
                                     const data = chart.data;
                                     if (data.labels.length && data.datasets.length) {
@@ -663,11 +664,18 @@
                                             const ds = data.datasets[0];
                                             const val = i === 0 ? "R$ 2.250" : "R$ 73.000";
                                             
-                                            // QUEBRA DE LINHA RESPONSIVA: 
-                                            // Se for telemóvel (ecrã < 768px), transforma num Array para quebrar em 2 linhas. Se for PC, mantém numa só linha.
-                                            const textoFinal = window.innerWidth < 768 
-                                                ? [label, val] 
-                                                : label + ': ' + val;
+                                            let textoFinal;
+                                            if (window.innerWidth < 768) {
+                                                if (i === 0) {
+                                                    // Quebrando em 3 linhas para não alargar e não cortar
+                                                    textoFinal = ["Investimento dos", "Contadores (SQLs)", val];
+                                                } else {
+                                                    // 2 linhas para o segundo
+                                                    textoFinal = ["Honorários (Lucro)", val];
+                                                }
+                                            } else {
+                                                textoFinal = label + ': ' + val;
+                                            }
 
                                             return {
                                                 text: textoFinal,
