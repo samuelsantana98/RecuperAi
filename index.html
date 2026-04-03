@@ -62,12 +62,13 @@
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            /* Altura ajustada pois a legenda saiu de dentro do canvas */
+            height: 220px;
+            max-height: 300px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 280px;
             }
         }
 
@@ -192,9 +193,22 @@
                     <div class="order-2 md:order-1 glass-card p-6 md:p-10 rounded-[2rem] bg-v4-black border-none text-white overflow-hidden relative shadow-2xl">
                         <div class="absolute top-0 right-0 w-48 md:w-64 h-48 md:h-64 bg-v4-red/10 blur-3xl rounded-full -mr-24 -mt-24 md:-mr-32 md:-mt-32"></div>
                         <h3 class="text-center text-xs md:text-sm font-black text-v4-red mb-10 md:mb-12 tracking-[0.2em] md:tracking-[0.3em] uppercase">ROI do Ecossistema</h3>
-                        <div class="chart-container mt-6 mb-6 md:mb-8">
+                        
+                        <div class="chart-container mt-6">
                             <canvas id="recoveryPieChart"></canvas>
                         </div>
+
+                        <div class="flex flex-col md:flex-row justify-center items-start md:items-center gap-4 md:gap-6 mt-6 mb-8 text-left md:text-center w-max mx-auto md:w-full">
+                            <div class="flex items-center text-white text-xs md:text-sm font-black">
+                                <span class="w-3 h-3 md:w-4 md:h-4 rounded bg-white mr-2 flex-shrink-0"></span>
+                                <span>Investimento dos Contadores (SQLs):<br class="md:hidden"> R$ 2.250</span>
+                            </div>
+                            <div class="flex items-center text-white text-xs md:text-sm font-black">
+                                <span class="w-3 h-3 md:w-4 md:h-4 rounded bg-v4-red mr-2 flex-shrink-0"></span>
+                                <span>Honorários (Lucro):<br class="md:hidden"> R$ 73.000</span>
+                            </div>
+                        </div>
+                        
                         <div class="space-y-4 pt-4 md:pt-6 border-t border-white/10">
                             <div class="flex flex-col md:flex-row justify-between text-xs font-bold uppercase tracking-wider gap-1">
                                 <span class="text-gray-300">Retorno para o Empresário</span>
@@ -645,51 +659,7 @@
                     cutout: '75%', 
                     plugins: {
                         legend: {
-                            position: 'bottom',
-                            labels: {
-                                font: {
-                                    family: "'Inter', sans-serif",
-                                    size: window.innerWidth < 768 ? 11 : 14, 
-                                    weight: '800'
-                                },
-                                color: '#ffffff',
-                                padding: window.innerWidth < 768 ? 10 : 20, 
-                                usePointStyle: true,
-                                pointStyle: 'rectRounded',
-                                boxWidth: window.innerWidth < 768 ? 10 : 15,
-                                generateLabels: function (chart) {
-                                    const data = chart.data;
-                                    if (data.labels.length && data.datasets.length) {
-                                        return data.labels.map(function (label, i) {
-                                            const ds = data.datasets[0];
-                                            const val = i === 0 ? "R$ 2.250" : "R$ 73.000";
-                                            
-                                            let textoFinal;
-                                            if (window.innerWidth < 768) {
-                                                if (i === 0) {
-                                                    // Quebrando em 3 linhas para não alargar e não cortar
-                                                    textoFinal = ["Investimento dos", "Contadores (SQLs)", val];
-                                                } else {
-                                                    // 2 linhas para o segundo
-                                                    textoFinal = ["Honorários (Lucro)", val];
-                                                }
-                                            } else {
-                                                textoFinal = label + ': ' + val;
-                                            }
-
-                                            return {
-                                                text: textoFinal,
-                                                fillStyle: ds.backgroundColor[i],
-                                                hidden: false,
-                                                index: i,
-                                                fontColor: '#ffffff',
-                                                pointStyle: 'rectRounded'
-                                            };
-                                        });
-                                    }
-                                    return [];
-                                }
-                            }
+                            display: false // DESLIGAMOS A LEGENDA INTERNA AQUI!
                         },
                         tooltip: {
                             backgroundColor: '#1a1a1a',
