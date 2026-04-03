@@ -216,7 +216,7 @@
                         <div class="relative pl-14 md:pl-16">
                             <div class="absolute left-0 top-0 w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-lg md:text-xl shadow-lg shadow-v4-red/20 italic">02</div>
                             <h4 class="text-xl md:text-2xl font-black text-v4-black uppercase italic tracking-tight">O Parceiro lucra</h4>
-                            <p class="text-sm md:text-base text-gray-600 mt-2 leading-relaxed">O contador parceiro ganhará com o sucess fee de 30% o valor total de: R$ 73k) sobre os valores recuperados.</p>
+                            <p class="text-sm md:text-base text-gray-600 mt-2 leading-relaxed">O contador parceiro ganhará com o sucess fee de 30% o valor total de: R$ 73k sobre os valores recuperados.</p>
                         </div>
                         <div class="relative pl-14 md:pl-16">
                             <div class="absolute left-0 top-0 w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-v4-red flex items-center justify-center text-white font-black text-lg md:text-xl shadow-lg shadow-v4-red/20 italic">03</div>
@@ -644,27 +644,35 @@
                     maintainAspectRatio: false,
                     cutout: '75%', 
                     plugins: {
-                           legend: {
-                            position: 'top', // Alterado de 'bottom' para 'top'
+legend: {
+                            position: 'bottom', // Sugiro manter em baixo para não espremer o gráfico
                             labels: {
                                 font: {
                                     family: "'Inter', sans-serif",
-                                    size: 18, // Aumentado agressivamente para 18px
+                                    // Responsivo: 12px no telemóvel, 16px no computador
+                                    size: window.innerWidth < 768 ? 12 : 16, 
                                     weight: '800'
                                 },
                                 color: '#ffffff',
-                                padding: 25, // Aumentado para 25 para dar mais espaço
+                                // Menos espaçamento no telemóvel
+                                padding: window.innerWidth < 768 ? 15 : 25, 
                                 usePointStyle: true,
                                 pointStyle: 'rectRounded',
-                                pointStyleWidth: 15, // Aumentado o tamanho do ícone marcador
                                 generateLabels: function (chart) {
                                     const data = chart.data;
                                     if (data.labels.length && data.datasets.length) {
                                         return data.labels.map(function (label, i) {
                                             const ds = data.datasets[0];
                                             const val = i === 0 ? "R$ 2.250" : "R$ 73.000";
+                                            
+                                            // QUEBRA DE LINHA RESPONSIVA: 
+                                            // Se for telemóvel (ecrã < 768px), transforma num Array para quebrar em 2 linhas. Se for PC, mantém numa só linha.
+                                            const textoFinal = window.innerWidth < 768 
+                                                ? [label, val] 
+                                                : label + ': ' + val;
+
                                             return {
-                                                text: label + ': ' + val,
+                                                text: textoFinal,
                                                 fillStyle: ds.backgroundColor[i],
                                                 hidden: false,
                                                 index: i,
@@ -673,6 +681,10 @@
                                             };
                                         });
                                     }
+                                    return [];
+                                }
+                            }
+                        },
                                     return [];
                                 }
                             }
